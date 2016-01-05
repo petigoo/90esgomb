@@ -2,11 +2,14 @@
 <html>
 	<head>
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="jquery-2.1.4.min.js"></script>
 	</head>
 	<body>
 		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-		<div id="player" style="display: none;"></div>
+		<div id="playerbox">
+			<div id="player" style="display: none;"></div>
+		</div>
 
 		<script type = "text/javascript" language = "javascript">
 
@@ -70,8 +73,8 @@
 			//    after the API code downloads.
 			function onYouTubeIframeAPIReady() {
 				player = new YT.Player('player', {
-					height: '390',
-					width: '640',
+					height: '300',
+					width: '500',
 					events: {
 						'onReady': onPlayerReady,
 						'onStateChange': onPlayerStateChange
