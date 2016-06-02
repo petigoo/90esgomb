@@ -1,113 +1,68 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="jquery-2.1.4.min.js"></script>
-	</head>
-	<body>
-		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-		<div id="playerbox">
-			<div id="player" style="display: none;"></div>
+<html lang="hu">
+  <head>
+
+	<meta charset="utf-8">
+	<meta property="og:title" content="Instant 90-es évek" />
+	<meta property="og:description" content="Online pöttyös labda dobáló alkalmazás 1.0" />
+	<!-- <meta property="og:url" content="http://90esgomb.hu/"/> -->
+	<meta property="og:site_name" content="INSTANT 90-ES ÉVEK GONB!!4"/>
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="fericon.png" />
+	<meta property="og:image" content="tibicon.png" />
+	<meta property="og:image" content="zsolticon.png" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Instant 90-es évek gomb - Online pöttyös labda dobáló alkalmazás 1.0">
+	<meta name="keywords" content="dévényi tibi bácsi piros pöttyös labda fridi z+ viva tv gyere és táncold át velem az éjszakát suttyó disco retro 1990 lilu szopjatokle mind szmoorúbékaenber">
+
+	<title>INSTANT 90-ES ÉVEK GONB!!4</title>	
+	
+	<link rel="icon" type="image/png" href="http://90esgomb.hu/tape_16px.png" />
+	<link rel="image_src" href="fericon.png" />
+	<link rel="stylesheet" type="text/css" href="carpediem.css">
+	
+	<script src="http://www.youtube.com/player_api"></script>
+	<script src="carpediem.js" charset="utf-8"></script>
+	<script src="playlist.json" charset="utf-8"></script>
+  </head>
+  
+<body onmousedown="document.getElementById('fog').style.display='none';" onmouseup="document.getElementById('fog').style.display='block';">
+
+	<img id="workaround" src="fericon.png" alt="og:workaround" style="display:none;"/>
+	
+	<header>
+		<a href="#" class="button" onclick="csapjad(false);" onmouseover="document.getElementById('fog').style.display='none';"></a>
+	</header>
+	
+	<div id="szaj">
+		<div id="video">
+			<div id="placeholder">
+				<div id="player"></div>
+			</div>
 		</div>
+	</div>
 
-		<script type = "text/javascript" language = "javascript">
-
-			var videoID = null;
-			var videoArray = new Array();
-
-			function selectNextVideoID(videoArray) {
-				do {
-					newVideoID = this.videoArray[ Math.floor((Math.random() * this.videoArray.length)) ];
-				} while (newVideoID == videoID);
-				return newVideoID;
-			}
-
-			function changeImageToOver() {
-				$('#playimage').attr('src', 'images/baszasd.png');
-			}
-
-			function changeImageToOut() {
-				$('#playimage').attr('src', 'images/baszatas.png');
-			}
-
-			function changeImageToClick() {
-				$('#playimage').attr('onmouseout', '');
-				$('#playimage').attr('src', 'images/fasza_csavo_vagy.png');
-				window.setTimeout(restoreOnHoverImageChange, 2500);
-			}
-
-			function restoreOnHoverImageChange(){
-				changeImageToOut();
-				$('#playimage').attr('onmouseout', 'changeImageToOut()');
-			}
-
-			$(document).ready(function() {
-
-				$("#playimage").click(function(event){
-					$.getJSON('playlist.json', function(data) {
-						videoArray = new Array();
-						$.each(data, function(i, d) {
-							// console.log(d.hash);
-							videoArray.push(d.hash);
-						});
-						videoID = selectNextVideoID(videoArray);
-						// videoID = newVideoID;
-						console.log(videoID);
-						play(videoID);
-					});
-				});
-
-			});
-
-			var player;
-			var id;
-
-			// 2. This code loads the IFrame Player API code asynchronously.
-			var tag = document.createElement('script');
-
-			tag.src = "https://www.youtube.com/iframe_api";
-			var firstScriptTag = document.getElementsByTagName('script')[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-			// 3. This function creates an <iframe> (and YouTube player)
-			//    after the API code downloads.
-			function onYouTubeIframeAPIReady() {
-				player = new YT.Player('player', {
-					height: '300',
-					width: '500',
-					events: {
-						'onReady': onPlayerReady,
-						'onStateChange': onPlayerStateChange
-					}
-				});
-			}
-
-			// 4. The API will call this function when the video player is ready.
-			function onPlayerReady(event) {
-				event.target.playVideo();
-			}
-
-			// 5. The API calls this function when the player's state changes.
-			//    The function indicates that when playing a video (state=1),
-			//    the player should play for six seconds and then stop.
-			function onPlayerStateChange(event) {
-				if (event.data == YT.PlayerState.ENDED) {
-					console.log("belep");
-					play(selectNextVideoID());
-				}
-			}
-
-			function play(id) {
-				player.stopVideo();
-
-				//selectID();
-
-				player.loadVideoById(id);
-				$('#player').css('display', 'inline');
-				player.playVideo();
-			}
-
-		</script>
-		<img src="images/baszatas.png" id="playimage" onmouseover=changeImageToOver() onmouseout=changeImageToOut() onclick=changeImageToClick() />
-	</body>
+	<div id="fog">
+	</div>
+	
+	<footer>
+		<img id="disco" src="disco.png" alt="Mindenki bejöhet, nincsen korhatár"/>
+		<br /><hr />
+		<p>Utoljára frissítve: 1995.03.03 13:37&nbsp;<a href="https://www.facebook.com/sharer/sharer.php?u=http://90esgomb.hu/" target="_blank" alt="Megosztás"><img src="counter.gif" alt="Te vagy az egymilliomodik látogató!"/>&nbsp;<img src="neckep.gif" alt="Download Netscape Navigator 3.0"/>&nbsp;<img src="hun.gif" style="width:40px;" alt="hungarian flag gif"/></a></p>
+		
+		<div id="facse">
+			<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/hu_HU/all.js#xfbml=1&appId=183261778378033";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script>
+			<div class="fb-like" data-href="http://90esgomb.hu/" data-width="380" data-show-faces="true"></div>
+		</div>	
+	</footer>
+	
+</body>
 </html>
